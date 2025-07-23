@@ -1,4 +1,4 @@
-"""
+```
 --- FOLD 1/5 ---
 Running GWO for hyperparameter optimization...
 2025/07/22 11:19:24 PM, INFO, mealpy.swarm_based.GWO.OriginalGWO: Solving single objective optimization problem.
@@ -99,5 +99,5 @@ Confusion Matrices for each fold:
  [ 2 23  0]
  [ 0  0 38]]
 --------------------
-"""
+```
 BEST PARAMETERS FOUND FOUND: Neurons=(56, 81, 82), LR=0.0054
