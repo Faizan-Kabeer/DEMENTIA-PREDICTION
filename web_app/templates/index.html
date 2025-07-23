@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alzheimer's Disease Prediction</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for loading spinner */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Alzheimer's Prediction Tool</h1>
+            <p class="mt-2 text-lg text-gray-600">Enter patient data below to get a diagnosis prediction.</p>
+        </header>
+
+        <!-- Main Content: Form and Results -->
+        <main class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+            
+            <form id="prediction-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Form Fields -->
+                    <div>
+                        <label for="M/F" class="block text-sm font-medium text-gray-700">Gender</label>
+                        <select id="M/F" name="M/F" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="F">Female</option>
+                            <option value="M">Male</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="Age" class="block text-sm font-medium text-gray-700">Age</label>
+                        <input type="number" id="Age" name="Age" placeholder="e.g., 75" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+
+                    <div>
+                        <label for="EDUC" class="block text-sm font-medium text-gray-700">Education (Years)</label>
+                        <input type="number" id="EDUC" name="EDUC" placeholder="e.g., 12" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+
+                    <div>
+                        <label for="SES" class="block text-sm font-medium text-gray-700">Socioeconomic Status</label>
+                        <input type="number" step="0.1" id="SES" name="SES" placeholder="e.g., 2.0" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+
+                    <div>
+                        <label for="MMSE" class="block text-sm font-medium text-gray-700">MMSE Score</label>
+                        <input type="number" step="0.1" id="MMSE" name="MMSE" placeholder="e.g., 28.0" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+
+                    <div>
+                        <label for="CDR" class="block text-sm font-medium text-gray-700">CDR Score</label>
+                        <input type="number" step="0.1" id="CDR" name="CDR" placeholder="e.g., 0.5" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+
+                    <div>
+                        <label for="eTIV" class="block text-sm font-medium text-gray-700">Est. Total Intracranial Vol.</label>
+                        <input type="number" id="eTIV" name="eTIV" placeholder="e.g., 1500" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+
+                    <div>
+                        <label for="nWBV" class="block text-sm font-medium text-gray-700">Normalize Whole Brain Vol.</label>
+                        <input type="number" step="0.001" id="nWBV" name="nWBV" placeholder="e.g., 0.700" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+
+                    <div>
+                        <label for="ASF" class="block text-sm font-medium text-gray-700">Atlas Scaling Factor</label>
+                        <input type="number" step="0.001" id="ASF" name="ASF" placeholder="e.g., 1.200" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 flex items-center justify-end space-x-4">
+                    <button type="button" id="clear-button" class="px-6 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Clear
+                    </button>
+                    <button type="submit" class="inline-flex items-center px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span id="predict-text">Predict</span>
+                        <div id="loader" class="loader hidden ml-2"></div>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Results Section -->
+            <div id="results-section" class="mt-8 pt-6 border-t border-gray-200 hidden">
+                <h2 class="text-2xl font-semibold text-gray-800">Prediction Result</h2>
+                <div id="result-card" class="mt-4 p-6 rounded-lg">
+                    <!-- Dynamic content will be injected here -->
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="text-center mt-8 text-sm text-gray-500">
+            <p>This tool is for informational purposes only and is not a substitute for professional medical advice.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Get references to DOM elements
+        const form = document.getElementById('prediction-form');
+        const resultsSection = document.getElementById('results-section');
+        const resultCard = document.getElementById('result-card');
+        const clearButton = document.getElementById('clear-button');
+        const predictButtonText = document.getElementById('predict-text');
+        const loader = document.getElementById('loader');
+
+        // Use a relative URL for the API endpoint, as Flask is serving this page.
+        const apiUrl = '/predict';
+
+        // Listen for form submission
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Show loading state
+            predictButtonText.classList.add('hidden');
+            loader.classList.remove('hidden');
+            resultsSection.classList.add('hidden'); // Hide previous results
+
+            // Create a FormData object from the form
+            const formData = new FormData(form);
+            const data = {};
+            // Convert FormData to a plain JavaScript object, converting numbers where appropriate
+            for (let [key, value] of formData.entries()) {
+                // The API expects numbers for all fields except M/F
+                data[key] = (key === 'M/F') ? value : Number(value);
+            }
+            
+            // We need to add 'Visit' and 'MR Delay' as the model expects them
+            data['Visit'] = 1;
+            data['MR Delay'] = 0;
+
+            try {
+                // Send the data to the Flask API using fetch
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    // If the server response is not OK, handle the error
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `HTTP error! Status: ${response.status}`);
+                }
+
+                // Get the JSON response from the API
+                const result = await response.json();
+                displayResult(result);
+
+            } catch (error) {
+                // Handle network errors or errors from the API
+                displayError(error.message);
+            } finally {
+                // Hide loading state
+                predictButtonText.classList.remove('hidden');
+                loader.classList.add('hidden');
+            }
+        });
+
+        // Function to display the prediction result
+        function displayResult(result) {
+            const label = result.prediction_label;
+            let bgColor, textColor, title;
+
+            // Set card styles based on the prediction label
+            switch (label.toLowerCase()) {
+                case 'demented':
+                    bgColor = 'bg-red-100';
+                    textColor = 'text-red-800';
+                    title = 'Diagnosis: Demented';
+                    break;
+                case 'nondemented':
+                    bgColor = 'bg-green-100';
+                    textColor = 'text-green-800';
+                    title = 'Diagnosis: Non-Demented';
+                    break;
+                default: // Converted or other
+                    bgColor = 'bg-yellow-100';
+                    textColor = 'text-yellow-800';
+                    title = 'Diagnosis: Converted';
+                    break;
+            }
+
+            resultCard.className = `mt-4 p-6 rounded-lg ${bgColor} ${textColor}`;
+            resultCard.innerHTML = `
+                <h3 class="text-xl font-bold">${title}</h3>
+                <p class="mt-2">The model predicts that the patient's group is <strong>${label}</strong>.</p>
+            `;
+            resultsSection.classList.remove('hidden');
+        }
+
+        // Function to display an error message
+        function displayError(errorMessage) {
+            resultCard.className = 'mt-4 p-6 rounded-lg bg-red-100 text-red-800';
+            resultCard.innerHTML = `
+                <h3 class="text-xl font-bold">Error</h3>
+                <p class="mt-2">An error occurred: <strong>${errorMessage}</strong></p>
+                <p class="mt-1 text-sm">Please check the input values and ensure the API server is running.</p>
+            `;
+            resultsSection.classList.remove('hidden');
+        }
+
+        // Add functionality to the clear button
+        clearButton.addEventListener('click', () => {
+            form.reset();
+            resultsSection.classList.add('hidden');
+        });
+
+    </script>
+
+</body>
+</html>
