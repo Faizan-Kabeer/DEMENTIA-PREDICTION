@@ -1,8 +1,8 @@
 # Dementia Prediction
 
-A machine learning pipeline for predicting dementia levels using the OASIS dataset, featuring:
+A machine learning pipeline for predicting dementia using the OASIS dataset, featuring:
 
-- Stratified K-Fold Cross-Validation to handle class imbalances
+- Stratified K-Fold Cross-Validation and Synthetic Minority Oversampling Technique to handle class imbalances
 
 - Gray Wolf Optimization (GWO) for hyperparameter tuning
 
