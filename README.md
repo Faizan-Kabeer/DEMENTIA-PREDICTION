@@ -11,7 +11,6 @@ A machine learning pipeline for predicting dementia levels using the OASIS datas
 ### 📚 Reference
 
 This project is inspired by the following paper:
-
 > **Optimized Transfer Learning Based Dementia Prediction System for Rehabilitation Therapy Planning**  
 > *P. -H. Kuo, C. -T. Huang and T. -C. Yao*  
 > IEEE Transactions on Neural Systems and Rehabilitation Engineering, vol. 31, pp. 2047-2059, 2023  
