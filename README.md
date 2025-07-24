@@ -8,3 +8,13 @@ A machine learning pipeline for predicting dementia levels using the OASIS datas
 
 - A Flask-based web application for real-time predictions
 
+### 📚 Reference
+
+This project is inspired by the following paper:
+
+> **Optimized Transfer Learning Based Dementia Prediction System for Rehabilitation Therapy Planning**  
+> *P. -H. Kuo, C. -T. Huang and T. -C. Yao*  
+> IEEE Transactions on Neural Systems and Rehabilitation Engineering, vol. 31, pp. 2047-2059, 2023  
+> [https://doi.org/10.1109/TNSRE.2023.3267811](https://doi.org/10.1109/TNSRE.2023.3267811)
+
+
